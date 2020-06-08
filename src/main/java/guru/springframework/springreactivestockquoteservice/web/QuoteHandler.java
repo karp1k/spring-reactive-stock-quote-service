@@ -23,10 +23,19 @@ public class QuoteHandler {
         this.quoteGeneratorService = quoteGeneratorService;
     }
 
+    // return fixed number of Quotes
     public Mono<ServerResponse> fetchQoutes(ServerRequest request) {
         int size = Integer.parseInt(request.queryParam("size").orElse("10"));
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(this.quoteGeneratorService.fetchQuoteStream(Duration.ofMillis(100L)).take(size), Quote.class);
+    }
+
+    // return unlimited number of Quotes
+    public Mono<ServerResponse> streamQuotes(ServerRequest request) {
+        return ServerResponse
+                .ok()
+                .contentType(MediaType.APPLICATION_STREAM_JSON)
+                .body(this.quoteGeneratorService.fetchQuoteStream(Duration.ofMillis(100L)), Quote.class);
     }
 }

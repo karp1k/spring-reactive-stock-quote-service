@@ -14,8 +14,8 @@ public class QuoteRouter {
 
     @Bean
     RouterFunction<ServerResponse> route(QuoteHandler quoteHandler) {
-        return RouterFunctions.route(
-                RequestPredicates.GET("/quote").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
-                quoteHandler::fetchQoutes);
+        return RouterFunctions
+        .route(RequestPredicates.GET("/quote").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), quoteHandler::fetchQoutes)
+        .andRoute(RequestPredicates.GET("/quote").and(RequestPredicates.accept(MediaType.APPLICATION_STREAM_JSON)), quoteHandler::streamQuotes);
     }
 }

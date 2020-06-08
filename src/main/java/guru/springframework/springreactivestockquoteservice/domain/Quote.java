@@ -1,6 +1,7 @@
 package guru.springframework.springreactivestockquoteservice.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -10,6 +11,7 @@ import java.time.Instant;
  * @author kas
  */
 @Data
+@NoArgsConstructor
 public class Quote {
 
     private static final MathContext MATH_CONTEXT = new MathContext(2);
